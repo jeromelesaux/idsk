@@ -883,6 +883,7 @@ bool DSK::PutFileInDsk( string Masque ,int TypeModeImport ,int loadAdress, int e
 		return false;
 	
 	
+	memset(Buff,0,sizeof(Buff));
 
 	cFileName = GetNomAmsdos((char *)Masque.c_str());
 	if ((  Hfile = fopen(Masque.c_str(),"rb")) == NULL ) return false;
@@ -892,7 +893,8 @@ bool DSK::PutFileInDsk( string Masque ,int TypeModeImport ,int loadAdress, int e
         StAmsdos * e = ( StAmsdos * )Buff;
         // Attention : longueur > 64Ko !
         if ( Lg > 0x10080 ) {
-		free(cFileName);
+			std::cout << "Cannot write \"" << cFileName << "\" into DSK file exceed 64 Ko size." << std::endl;
+		//free(cFileName);
 		return false;
 	}
 		
@@ -1183,8 +1185,8 @@ std::string DSK::ReadDskDir( void ) {
 					t += TabDir[ p + i ].NbPages;
 				p++;
 			} while( TabDir[ p + i ].NumPage && ( p + i ) < 64  );
-            //string size = GetTaille( ( t + 7 ) >> 3  );
-            //catalogue+= " : " + size + "\n";
+            string size = GetTaille( ( t + 7 ) >> 3  );
+            catalogue+= " : " + size;
             catalogue += "\n";
 
 		}
