@@ -84,7 +84,9 @@ void Basic( BYTE * BufFile, char * Listing, bool IsBasic, bool CrLf )
     double f;
     int exp;
 	int Deprotect=0;
-	//cout << BufFile <<endl;
+    memset(Tmp,32,0);
+    memset(Listing, 0x10000,0);
+//	cout << BufFile <<endl;
     static const char * Nbre[ 11 ] =
         {
         "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
