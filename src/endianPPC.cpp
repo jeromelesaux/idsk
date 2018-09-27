@@ -4,8 +4,10 @@ using namespace std;
 #include "endianPPC.h"
 
 #ifndef _MSC_VER
+#ifndef __APPLE__
 #include <sys/param.h>
 #include <endian.h>
+#endif
 #endif
 
 bool isBigEndian(void)
